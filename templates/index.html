@@ -1,0 +1,41 @@
+{%extends 'base.html' %}
+    {%block head%}
+        <title>Home Page</title>
+    {% endblock %}
+
+    {%block body%}
+        <div class="container">
+            <h1>CS527 SQL App!!</h1>
+            <form class = "form" action="/queryresults" method="POST">
+                <div class="form-row">
+                    <div class="col-md-5">
+                        <div class="form-group">
+                            <label for="Query"></label>
+                            <input type="text" name="query" class="form-control" id="query" placeholder="Enter query">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="dboption" id="mysql" value="mysql" checked>
+                    <label class="form-check-label" for="exampleRadios1">
+                      MySQL
+                    </label>
+                </div>
+
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="dboption" id="redshift" value="redshift" checked>
+                    <label class="form-check-label" for="exampleRadios1">
+                      RedShift
+                    </label>
+                </div>
+
+                <button type="submit" class="btn btn-primary">Run</button>
+            </form>
+
+            
+            <!-- <button type="button" class="btn btn-link" href="/login">Login </button>
+            <button type="button" class="btn btn-primary"  href="/signup">Sign up</button> -->
+        </div>
+    {% endblock %}
+
