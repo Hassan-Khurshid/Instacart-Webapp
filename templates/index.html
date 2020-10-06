@@ -34,6 +34,13 @@
             </form>
 
             
+            {% if query %}
+            <p>Results: {{ query }}!</p>
+            {% else %}
+            <p>Error executing query.</p>
+            {% endif %}
+
+
             <!-- <button type="button" class="btn btn-link" href="/login">Login </button>
             <button type="button" class="btn btn-primary"  href="/signup">Sign up</button> -->
         </div>
