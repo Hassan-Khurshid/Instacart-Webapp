@@ -33,16 +33,47 @@
                 <button type="submit" class="btn btn-primary">Run</button>
             </form>
 
-            
+            <div>
+               <h1>TEST BLOCK BEFORE</h1>
+            </div>
+
             {% if query %}
-            <p>Results: {{ query }}!</p>
+
+            <!-- <p>Results: {{ query }}!</p> -->
+            <!-- {{query}} -->
+
+<!-- THE CODE IN HERE WORKS WELL!!!!
+            <table>
+            {% for thing in query %}
+               <tr>
+                  {% for item in thing %}
+                  <td>{{ item }}</td>
+                  {% endfor %}
+               </tr>
+            {% endfor %}
+            </table>
+-->
+            {{query}}
+
+
+            <br><br><br><br><br><br><br><br><br><br>
+
+
+
             {% else %}
             <p>Error executing query.</p>
             {% endif %}
 
+            <div>
+               <h5>
+                  Knowns: "query" is a sequence, not a string or a mapping.<br>
+                  We can also iterate over it.<br>
+                  Using a replace filter to restore carriage returns inside the braces with query doesn't work.<br>
+
+               </h5>
+            </div>
 
             <!-- <button type="button" class="btn btn-link" href="/login">Login </button>
             <button type="button" class="btn btn-primary"  href="/signup">Sign up</button> -->
         </div>
     {% endblock %}
-
