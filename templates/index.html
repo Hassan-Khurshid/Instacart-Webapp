@@ -17,14 +17,14 @@
                 </div>
 
                 <div class="form-check">
-                    <input class="form-check-input" type="radio" name="dboption" id="mysql" value="mysql" checked>
+                    <input class="form-check-input" type="radio" name="dboption" id="mysql" value="mysql">
                     <label class="form-check-label" for="exampleRadios1">
                       MySQL
                     </label>
                 </div>
 
                 <div class="form-check">
-                    <input class="form-check-input" type="radio" name="dboption" id="redshift" value="redshift" checked>
+                    <input class="form-check-input" type="radio" name="dboption" id="redshift" value="redshift">
                     <label class="form-check-label" for="exampleRadios1">
                       RedShift
                     </label>
@@ -33,11 +33,16 @@
                 <button type="submit" class="btn btn-primary">Run</button>
             </form>
 
+            {% if db_type %}
+            <p>Database Queried: {{ db_type }}</p>
+            {% endif %}
             
             {% if query %}
-            <p>Results: {{ query }}!</p>
-            {% else %}
-            <p>Error executing query.</p>
+            <p>Results: {{ query }}</p>
+            {% endif %}
+
+            {% if time %}
+            <p>Time Elapsed: {{ time }} seconds!</p>
             {% endif %}
 
 
