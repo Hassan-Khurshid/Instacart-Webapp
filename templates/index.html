@@ -17,14 +17,14 @@
                 </div>
 
                 <div class="form-check">
-                    <input class="form-check-input" type="radio" name="dboption" id="mysql" value="mysql" checked>
+                    <input class="form-check-input" type="radio" name="dboption" id="mysql" value="mysql">
                     <label class="form-check-label" for="exampleRadios1">
                       MySQL
                     </label>
                 </div>
 
                 <div class="form-check">
-                    <input class="form-check-input" type="radio" name="dboption" id="redshift" value="redshift" checked>
+                    <input class="form-check-input" type="radio" name="dboption" id="redshift" value="redshift">
                     <label class="form-check-label" for="exampleRadios1">
                       RedShift
                     </label>
@@ -34,10 +34,16 @@
             </form>
 
             <div>
-               <h1>TEST BLOCK BEFORE</h1>
-            </div>
+                <h1>TEST BLOCK BEFORE</h1>
+             </div>
 
-            {% if query %}
+            {% if db_type %}
+            <p>Database Queried: {{ db_type }}</p>
+            {% endif %}
+
+            <!-- {% if query %}
+            <p>Results: {{ query }}</p>
+            {% endif %} -->
 
             <!-- <p>Results: {{ query }}!</p> -->
             <!-- {{query}} -->
@@ -53,15 +59,24 @@
             {% endfor %}
             </table>
 -->
-            {{query}}
+{{query}}
 
 
-            <br><br><br><br><br><br><br><br><br><br>
+<br><br><br><br><br><br><br><br><br><br>
+
+<div>
+    <h5>
+       Knowns: "query" is a sequence, not a string or a mapping.<br>
+       We can also iterate over it.<br>
+       Using a replace filter to restore carriage returns inside the braces with query doesn't work.<br>
+
+    </h5>
+ </div>
 
 
 
-            {% else %}
-            <p>Error executing query.</p>
+            {% if time %}
+            <p>Time Elapsed: {{ time }} seconds!</p>
             {% endif %}
 
             <div>
