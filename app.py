@@ -49,13 +49,16 @@ def runQuery():
         if query == "":
             return render_template('index.html')
 
-        database_type = request.form['dboption']
-        print('DATABASE TYPE: ',database_type)
+        service_type = request.form['serviceop']
+        print('SERVICE TYPE: ',service_type)
+
+        database_type = request.form['dbop']
+        print('DATABASE TYPE: ', database_type)
 
         start_time = time.time()
-        result = db_functions.executeQuery(query, database_type)
+        result = db_functions.executeQuery(query, service_type, database_type)
         end_time = time.time()
-        return render_template('index.html', query=result, db_type=database_type, time=(end_time-start_time))
+        return render_template('index.html', query=result, service_type=service_type, db_type=database_type, time=(end_time-start_time))
 
 
 

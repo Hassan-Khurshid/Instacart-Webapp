@@ -21,11 +21,13 @@ redshift = psycopg2.connect(
     database = "instacart_red"
 )
 
-def executeQuery(query, database_type):
-    if database_type == 'mysql':
+def executeQuery(query, service_type, db_type):
+    if service_type == 'mysql':
         cursor = mysql.cursor()
     else:
         cursor = redshift.cursor()
+
+    ## add code to take instacart and abcretail into account for proper querying ##
     cursor.execute(query)
     result = cursor.fetchall()
     return result

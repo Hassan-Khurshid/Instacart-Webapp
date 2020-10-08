@@ -16,29 +16,64 @@
                     </div>
                 </div>
 
-                <div class="form-check">
-                    <input class="form-check-input" type="radio" name="dboption" id="mysql" value="mysql">
-                    <label class="form-check-label" for="exampleRadios1">
-                      MySQL
-                    </label>
+                <br>
+
+                <div>
+                    <p>Select Service to Query:</p>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="serviceop" id="mysql" value="mysql">
+                        <label class="form-check-label" for="exampleRadios1">
+                        MySQL
+                        </label>
+                    </div>
+
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="serviceop" id="redshift" value="redshift">
+                        <label class="form-check-label" for="exampleRadios1">
+                        RedShift
+                        </label>
+                    </div>
                 </div>
 
-                <div class="form-check">
-                    <input class="form-check-input" type="radio" name="dboption" id="redshift" value="redshift">
-                    <label class="form-check-label" for="exampleRadios1">
-                      RedShift
-                    </label>
+                <br>
+                <div>
+                    <p>Select Database to Query:</p>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="dbop" id="instacart" value="instacart">
+                        <label class="form-check-label" for="exampleRadios1">
+                        Instacart
+                        </label>
+                    </div>
+
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="dbop" id="abc" value="abc">
+                        <label class="form-check-label" for="exampleRadios1">
+                        ABC Retail
+                        </label>
+                    </div>
                 </div>
 
+
+                    <br>
                 <button type="submit" class="btn btn-primary">Run</button>
             </form>
 
-            <div>
+            <br>
+            <!-- <div>
                 <h1>TEST BLOCK BEFORE</h1>
-             </div> 
+             </div>  -->
+
+            {% if service_type %}
+            <p>Service Queried: {{ service_type}}</p>
+            {% endif %}
 
             {% if db_type %}
             <p>Database Queried: {{ db_type }}</p>
+            {% endif %}
+
+            
+            {% if time %}
+            <p>Time Elapsed: {{ time }} seconds!</p>
             {% endif %}
             
             <!-- {% if query %}
@@ -48,8 +83,7 @@
             <!-- <p>Results: {{ query }}!</p> -->
             <!-- {{query}} -->
 
-<!-- THE CODE IN HERE WORKS WELL!!!!
-            <table>
+            <table class="table table-bordered table-sm">
             {% for thing in query %}
                <tr>
                   {% for item in thing %}
@@ -58,26 +92,22 @@
                </tr>
             {% endfor %}
             </table>
--->
-{{query}}
 
+ <!-- {{query}} -->
 
-<br><br><br><br><br><br><br><br><br><br>
+ <br><br><br><br><br><br><br><br><br><br>
 
-<div>
+<!-- <div>
     <h5>
        Knowns: "query" is a sequence, not a string or a mapping.<br>
        We can also iterate over it.<br>
        Using a replace filter to restore carriage returns inside the braces with query doesn't work.<br>
 
     </h5>
- </div>
+ </div> -->
 
 
 
-            {% if time %}
-            <p>Time Elapsed: {{ time }} seconds!</p>
-            {% endif %}
 
 
             <!-- <button type="button" class="btn btn-link" href="/login">Login </button>
