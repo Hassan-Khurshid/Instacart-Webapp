@@ -11,29 +11,6 @@ import time
 app = Flask(__name__)
 
 # # Database setup #
-# db = SQLAlchemy(app=app)
-
-
-
-# # mysql
-# db_username = 'group3'
-# db_password = 'group3pw!'
-# db_host = 'instacart-db.cbujeonilgtq.us-east-2.rds.amazonaws.com'
-# db_db = 'cs527_instacart'
-
-# # redshift
-# db_rs_username = 'group3'
-# db_rs_password = 'group3PW!'
-# db_rs_host = 'redshift-cluster-1.cw5prwl0hut7.us-east-2.redshift.amazonaws.com'
-# db_rs_db = 'instacart_red'
-
-
-# SQLALCHEMY_BINDS = {
-#     'mysql':        'mysql+pymysql://{}:{}@{}/{}'.format(db_username, db_password, db_host, db_db),
-#     'appmeta':      'jdbc:redshift://redshift-cluster-1.cw5prwl0hut7.us-east-2.redshift.amazonaws.com:5439/instacart_red'
-# }
-# db.create_all()
-
 
 @app.route("/")
 def index():
@@ -44,21 +21,39 @@ def runQuery():
     if request.method == 'POST':
         
         query = request.form['query']
-        print('QUERY: ', query)
-
         if query == "":
             return render_template('index.html')
-
         service_type = request.form['serviceop']
-        print('SERVICE TYPE: ',service_type)
-
         database_type = request.form['dbop']
-        print('DATABASE TYPE: ', database_type)
 
+        # capture start time #
         start_time = time.time()
+
+        # execute user query #
         result = db_functions.executeQuery(query, service_type, database_type)
+        # if result == 'Error!':
+        #     return render_template('index.html', query=result, service_type=service_type, db_type=database_type)
+
+        # fetch columns names from internal view #
+        col_names = db_functions.getColumnsFromView(service_type, database_type)
+        # if col_names == 'Error!':
+        #     return render_template('index.html', query=col_names, service_type=service_type, db_type=database_type)
+    
+        # drop view #
+        dropRes = db_functions.dropView(service_type, database_type)
+        # if dropRes == 'Error!':
+        #     return render_template('index.html', query=dropRes, service_type=service_type, db_type=database_type)
+       
+        # capture end time #
         end_time = time.time()
-        return render_template('index.html', query=result, service_type=service_type, db_type=database_type, time=(end_time-start_time))
+
+        # render result #
+        return render_template('index.html', 
+                                query=result, 
+                                col_names=col_names, 
+                                service_type=service_type, 
+                                db_type=database_type, 
+                                time=(end_time-start_time))
 
 
 

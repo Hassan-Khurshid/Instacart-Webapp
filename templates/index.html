@@ -84,6 +84,14 @@
             <!-- {{query}} -->
 
             <table class="table table-bordered table-sm">
+            {% if col_names %}
+                <tr>
+                {% for item in col_names %}
+                    <td>{{ item }}</td>
+                {% endfor %}
+                </tr>
+            {% endif %}
+
             {% for thing in query %}
                <tr>
                   {% for item in thing %}
