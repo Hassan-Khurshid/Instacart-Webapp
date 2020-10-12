@@ -13,19 +13,40 @@
             <!-- <input type="text" name="query" class="form-control" id="query" placeholder="SELECT ..."> -->
             <textarea class="form-control" id="query" name="query" placeholder="SELECT ..."></textarea>
          </div>
+         <br>
+         <p>Select service type:</p>
          <div class="form-group">
             <div class="form-check">
-               <input class="form-check-input" type="radio" name="dboption" id="mysql" value="mysql">
+               <input class="form-check-input" type="radio" name="serviceop" id="MySQL" value="MySQL">
                <label class="form-check-label" for="exampleRadios1">
                   MySQL
                </label>
             </div>
             <div class="form-check">
-               <input class="form-check-input" type="radio" name="dboption" id="redshift" value="redshift">
+               <input class="form-check-input" type="radio" name="serviceop" id="Redshift" value="Redshift">
                <label class="form-check-label" for="exampleRadios1">
                   RedShift
                </label>
             </div>
+
+            <br>
+
+            <p>Select database:</p>
+            <div class="form-check">
+               <input class="form-check-input" type="radio" name="dbop" id="Instacart" value="Instacart">
+               <label class="form-check-label" for="exampleRadios1">
+                  Instacart
+               </label>
+            </div>
+
+            <div class="form-check">
+               <input class="form-check-input" type="radio" name="dbop" id="ABCRetail" value="ABCRetail">
+               <label class="form-check-label" for="exampleRadios1">
+                  ABC Retail
+               </label>
+            </div>
+
+         <br>
          </div>
          <div class="form-group">
             <button type="submit" class="btn btn-primary">
@@ -50,6 +71,14 @@
             <th>Something</th>
             <th>Something2</th>
          </tr> -->
+         <!-- {% if col_names %}
+            <tr>
+               {% for thing in col_names %}
+                  <td class='px-2 py-1'>{{ thing }}</td>
+               {% endfor %}
+            </tr>
+         {% endif %} -->
+         
          {% for thing in query %}
          <tr>
             {% for item in thing %}

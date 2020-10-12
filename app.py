@@ -25,6 +25,8 @@ def runQuery():
             return render_template('index.html')
         service_type = request.form['serviceop']
         database_type = request.form['dbop']
+        print(service_type)
+        print(database_type)
 
         # capture start time #
         start_time = time.time()
