@@ -27,7 +27,6 @@ redshift = psycopg2.connect(
 
 """
 Executes query requested by user. 
-Creates a VIEW and issues a SELECT * query to return results for user
 """
 
 def executeQuery(query, service_type, db_type):
@@ -39,39 +38,10 @@ def executeQuery(query, service_type, db_type):
     else:
         cursor = redshift.cursor()
 
-    ## create internal view ##
-    cursor.execute('CREATE VIEW CURVIEW AS '+ query)
-    cursor.execute('SELECT * FROM CURVIEW')
-    result = cursor.fetchall()
-    return result
-
-
-"""
- Drops view. Issued after every user request.
-"""
-def dropView( service_type, db_type):
-    if service_type == 'MySQL':
-        if db_type =='ABCRetail':
-            cursor = mysql_abc.cursor()
-        else:
-            cursor = mysql_insta.cursor()
-    else:
-        cursor = redshift.cursor()
-    cursor.execute('DROP VIEW CURVIEW')
-    return ""
-
-"""
-Obtains column names from view created in executeQuery().
-"""
-def getColumnsFromView(service_type, db_type):
-    if service_type == 'MySQL':
-        if db_type =='ABCRetail':
-            cursor = mysql_abc.cursor()
-        else:
-            cursor = mysql_insta.cursor()
-    else:
-        cursor = redshift.cursor()
-    cursor.execute("SELECT column_name FROM information_schema.columns WHERE table_name = 'CURVIEW'  ORDER BY ordinal_position ASC;")
-    return cursor.fetchall()
-   
+    cursor.execute(query)
+    result = cursor.fetchall() 
     
+    cols = cursor.description
+    colNames = [col[0] for col in cols]
+    
+    return [colNames, result]

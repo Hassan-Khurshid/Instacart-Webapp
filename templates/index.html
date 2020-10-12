@@ -56,9 +56,14 @@
       </form>
    </div>
 
+   {% if service_type %}
+   <p>Service Requested: {{ service_type }}</p>
+   {% endif %}
+
    {% if db_type %}
    <p>Database Queried: {{ db_type }}</p>
    {% endif %}
+
    {% if time %}
    <p>Query execution time: {{ (time*1000)|round(3) }} milliseconds.</p>
    {% endif %}
@@ -71,13 +76,13 @@
             <th>Something</th>
             <th>Something2</th>
          </tr> -->
-         <!-- {% if col_names %}
+         {% if col_names %}
             <tr>
                {% for thing in col_names %}
-                  <td class='px-2 py-1'>{{ thing }}</td>
+                  <td class='px-2 py-1'><b>{{ thing }}</b></td>
                {% endfor %}
             </tr>
-         {% endif %} -->
+         {% endif %}
          
          {% for thing in query %}
          <tr>
