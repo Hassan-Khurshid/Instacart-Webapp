@@ -1,94 +1,66 @@
 {%extends 'base.html' %}
-    {%block head%}
-        <title>Home Page</title>
-    {% endblock %}
+{%block head%}
+<title>Home Page</title>
+{% endblock %}
 
-    {%block body%}
-        <div class="container">
-            <h1>CS527 SQL App!!</h1>
-            <form class = "form" action="/queryresults" method="POST">
-                <div class="form-row">
-                    <div class="col-md-5">
-                        <div class="form-group">
-                            <label for="Query"></label>
-                            <input type="text" name="query" class="form-control" id="query" placeholder="Enter query">
-                        </div>
-                    </div>
-                </div>
-
-                <div class="form-check">
-                    <input class="form-check-input" type="radio" name="dboption" id="mysql" value="mysql">
-                    <label class="form-check-label" for="exampleRadios1">
-                      MySQL
-                    </label>
-                </div>
-
-                <div class="form-check">
-                    <input class="form-check-input" type="radio" name="dboption" id="redshift" value="redshift">
-                    <label class="form-check-label" for="exampleRadios1">
-                      RedShift
-                    </label>
-                </div>
-
-                <button type="submit" class="btn btn-primary">Run</button>
-            </form>
-
-            <div>
-                <h1>TEST BLOCK BEFORE</h1>
-             </div>
-
-            {% if db_type %}
-            <p>Database Queried: {{ db_type }}</p>
-            {% endif %}
-
-            <!-- {% if query %}
-            <p>Results: {{ query }}</p>
-            {% endif %} -->
-
-            <!-- <p>Results: {{ query }}!</p> -->
-            <!-- {{query}} -->
-
-<!-- THE CODE IN HERE WORKS WELL!!!!
-            <table>
-            {% for thing in query %}
-               <tr>
-                  {% for item in thing %}
-                  <td>{{ item }}</td>
-                  {% endfor %}
-               </tr>
-            {% endfor %}
-            </table>
--->
-{{query}}
-
-
-<br><br><br><br><br><br><br><br><br><br>
-
-<div>
-    <h5>
-       Knowns: "query" is a sequence, not a string or a mapping.<br>
-       We can also iterate over it.<br>
-       Using a replace filter to restore carriage returns inside the braces with query doesn't work.<br>
-
-    </h5>
- </div>
-
-
-
-            {% if time %}
-            <p>Time Elapsed: {{ time }} seconds!</p>
-            {% endif %}
-
-            <div>
-               <h5>
-                  Knowns: "query" is a sequence, not a string or a mapping.<br>
-                  We can also iterate over it.<br>
-                  Using a replace filter to restore carriage returns inside the braces with query doesn't work.<br>
-
-               </h5>
+{%block body%}
+<div class="container my-5">
+   <div class="row-fluid">
+      <h1 class="display-2 text-center">CS527 SQL App</h1>
+      <form class = "form" action="/queryresults" method="POST">
+         <div class="form-group">
+            <label for="query">SQL Query:</label>
+            <!-- <input type="text" name="query" class="form-control" id="query" placeholder="SELECT ..."> -->
+            <textarea class="form-control" id="query" name="query" placeholder="SELECT ..."></textarea>
+         </div>
+         <div class="form-group">
+            <div class="form-check">
+               <input class="form-check-input" type="radio" name="dboption" id="mysql" value="mysql">
+               <label class="form-check-label" for="exampleRadios1">
+                  MySQL
+               </label>
             </div>
+            <div class="form-check">
+               <input class="form-check-input" type="radio" name="dboption" id="redshift" value="redshift">
+               <label class="form-check-label" for="exampleRadios1">
+                  RedShift
+               </label>
+            </div>
+         </div>
+         <div class="form-group">
+            <button type="submit" class="btn btn-primary">
+               Run
+            </button>
+         </div>
+      </form>
+   </div>
 
-            <!-- <button type="button" class="btn btn-link" href="/login">Login </button>
-            <button type="button" class="btn btn-primary"  href="/signup">Sign up</button> -->
-        </div>
-    {% endblock %}
+   {% if db_type %}
+   <p>Database Queried: {{ db_type }}</p>
+   {% endif %}
+   {% if time %}
+   <p>Query execution time: {{ (time*1000)|round(3) }} milliseconds.</p>
+   {% endif %}
+
+   {% if query %}
+   <div class="table-responsive">
+      <table class="table-striped table-bordered">
+         <!-- This row (table headers) needs to be parameterized according to the number of columns. We could do this by storing the column names in another variable, just like {{query}} w/ the actual content, so then Jinja can loop through it and add a bunch of <th></th> tags...
+         <tr>
+            <th>Something</th>
+            <th>Something2</th>
+         </tr> -->
+         {% for thing in query %}
+         <tr>
+            {% for item in thing %}
+            <td class='px-2 py-1'>{{ item }}</td>
+            {% endfor %}
+         </tr>
+         {% endfor %}
+      </table>
+   </div>
+   {% endif %}
+   <!--Knowns: "query" is a sequence, not a string or a mapping. We can also iterate over it. Using a replace filter to restore carriage returns inside the braces with query doesn't work.-->
+</div>
+
+{% endblock %}
