@@ -31,8 +31,8 @@ Creates a VIEW and issues a SELECT * query to return results for user
 """
 
 def executeQuery(query, service_type, db_type):
-    if service_type == 'mysql':
-        if db_type =='abc':
+    if service_type == 'MySQL':
+        if db_type =='ABCRetail':
             cursor = mysql_abc.cursor()
         else:
             cursor = mysql_insta.cursor()
@@ -50,8 +50,8 @@ def executeQuery(query, service_type, db_type):
  Drops view. Issued after every user request.
 """
 def dropView( service_type, db_type):
-    if service_type == 'mysql':
-        if db_type =='abc':
+    if service_type == 'MySQL':
+        if db_type =='ABCRetail':
             cursor = mysql_abc.cursor()
         else:
             cursor = mysql_insta.cursor()
@@ -64,8 +64,8 @@ def dropView( service_type, db_type):
 Obtains column names from view created in executeQuery().
 """
 def getColumnsFromView(service_type, db_type):
-    if service_type == 'mysql':
-        if db_type =='abc':
+    if service_type == 'MySQL':
+        if db_type =='ABCRetail':
             cursor = mysql_abc.cursor()
         else:
             cursor = mysql_insta.cursor()
