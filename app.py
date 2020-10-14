@@ -9,7 +9,7 @@ import time
 
 
 app = Flask(__name__)
-
+application=app
 # # Database setup #
 
 @app.route("/")

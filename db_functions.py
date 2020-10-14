@@ -44,4 +44,5 @@ def executeQuery(query, service_type, db_type):
     cols = cursor.description
     colNames = [col[0] for col in cols]
     
+    cursor.close()
     return [colNames, result]
