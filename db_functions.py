@@ -30,6 +30,7 @@ Executes query requested by user.
 """
 
 def executeQuery(query, service_type, db_type):
+    cursor = None
     if service_type == 'MySQL':
         if db_type =='ABCRetail':
             cursor = mysql_abc.cursor()
